@@ -1,0 +1,31 @@
+services:
+  asp_net:
+    container_name: asp_net
+    image: aspnet
+    build: 
+      dockerfile: docker/dockerfiles/asp/Dockerfile
+      context: ../
+    restart: on-failure
+    env_file: ../.env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+    expose:
+      - 8080
+    depends_on:
+      - postgres_asp_net
+  
+  postgres_asp_net:
+    image: postgres:17rc1-alpine
+    platform: linux/arm64
+    restart: on-failure
+    env_file: ../.env
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    expose:
+      - 5432
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    
