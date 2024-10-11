@@ -19,7 +19,7 @@ ARG DATABASE_PASSWORD
 
 RUN dotnet new tool-manifest --force
 RUN dotnet tool install --local dotnet-ef --version 8.0.8
-RUN dotnet dotnet-ef database update
+#RUN dotnet dotnet-ef database update
 WORKDIR "/src/."
 RUN dotnet build "ASP.NET.csproj" -c $configuration -o /app/build
 
