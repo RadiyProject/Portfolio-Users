@@ -5,15 +5,16 @@ services:
     build: 
       dockerfile: docker/dockerfiles/asp/Dockerfile
       context: ../
+      args:
+        DATABASE_HOST: ${DATABASE_HOST}
+        DATABASE_NAME: ${DATABASE_NAME}
+        DATABASE_USER: ${DATABASE_USER}
+        DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     restart: on-failure
     env_file: ../.env
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: 8080
-      DATABASE_HOST: ${DATABASE_HOST}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     expose:
       - 8080
     depends_on:
