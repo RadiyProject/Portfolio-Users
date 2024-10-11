@@ -21,6 +21,7 @@ services:
       - postgres_asp_net
   
   postgres_asp_net:
+    container_name: postgres_asp_net
     image: postgres:17rc1-alpine
     restart: on-failure
     env_file: ../.env
