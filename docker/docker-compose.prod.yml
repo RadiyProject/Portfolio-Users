@@ -18,7 +18,8 @@ services:
     expose:
       - 8080
     depends_on:
-      - postgres_asp_net
+      postgres_asp_net:
+        condition: service_healthy
   
   postgres_asp_net:
     container_name: postgres_asp_net
@@ -33,4 +34,9 @@ services:
       - 5432
     volumes:
       - ./db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 10s
+      timeout: 20s
+      retries: 3
     
