@@ -14,7 +14,7 @@ string? name = Environment.GetEnvironmentVariable("DATABASE_NAME");
 string? user = Environment.GetEnvironmentVariable("DATABASE_USER");
 string? password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
 
-ApplicationDbContext db = (ApplicationDbContext)builder.Services.AddDbContext<ApplicationDbContext>(
+builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseNpgsql(
         "Host=" + host + ";Port=" + port + ";Database=" + name + ";Username=" + user + ";Password=" + password + ";"
     ));
@@ -30,8 +30,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-else 
-    db.Database.Migrate();
+else {
+    ApplicationDbContext? db = app.Services.GetService<ApplicationDbContext>();
+    db?.Database.Migrate();
+}
 
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
