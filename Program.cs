@@ -31,8 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 else {
-    ApplicationDbContext? db = app.Services.GetService<ApplicationDbContext>();
-    db?.Database.Migrate();
+    app.ApplyMigrations();
 }
 
 app.UseSerilogRequestLogging();

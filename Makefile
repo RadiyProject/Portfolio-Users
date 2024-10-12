@@ -36,4 +36,4 @@ dotnet-ef-init:
 	cd docker && docker compose --env-file ../.env -f docker-compose.${ENV_MODE}.yml exec ${ASP_CONTAINER} dotnet tool install --local dotnet-ef --version 8.0.8
 
 clean: ## Stop and remove all containers
-	docker compose -f docker-compose.${ENV_MODE}.yml down --remove-orphans
+	cd docker && docker compose -f docker-compose.${ENV_MODE}.yml down --remove-orphans
