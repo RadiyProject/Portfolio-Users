@@ -31,7 +31,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 else {
-    app.ApplyMigrations();
+    var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+    optionsBuilder.UseNpgsql("Host=" + host + ";Port=" + port + ";Database=" + name + ";Username=" + user + ";Password=" + password + ";");
+
+    ApplicationDbContext dbContext = new(optionsBuilder.Options);
 }
 
 app.UseSerilogRequestLogging();
