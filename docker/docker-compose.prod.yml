@@ -12,6 +12,8 @@ services:
       ASPNETCORE_HTTP_PORTS: 8080
     expose:
       - 8080
+    networks:
+      - radx
     depends_on:
       postgres_users:
         condition: service_healthy
@@ -27,6 +29,8 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     expose:
       - 5432
+    networks:
+      - radx
     volumes:
       - ./db:/var/lib/postgresql/data
     healthcheck:
