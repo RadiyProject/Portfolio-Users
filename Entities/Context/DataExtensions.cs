@@ -6,7 +6,9 @@ public static class DataExtensions
     {
         using var scope = app.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        db.Database.Migrate();
+        if (db.Database.GetPendingMigrations().Any())
+            db.Database.Migrate();
+            
         return app;
     }
 }
