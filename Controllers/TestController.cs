@@ -1,7 +1,7 @@
-using ASP.NET.Entities.Context;
+using Users.Entities.Context;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASP.NET.Controllers;
+namespace Users.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class TestController(ApplicationDbContext context, ILogger<TestController> logger) : Controller

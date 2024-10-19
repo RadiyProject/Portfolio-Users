@@ -1,7 +1,7 @@
 name: asp-net
 services:
-  asp_net:
-    container_name: asp_net
+  users_asp:
+    container_name: users_asp
     image: mcr.microsoft.com/dotnet/sdk:8.0
     platform: linux/arm64
     restart: on-failure
@@ -15,10 +15,10 @@ services:
     ports:
       - "5981:8080"
     depends_on:
-      - postgres_asp_net
+      - postgres_users
   
-  postgres_asp_net:
-    container_name: postgres_asp_net
+  postgres_users:
+    container_name: postgres_users
     image: postgres:17rc1-alpine
     platform: linux/arm64
     restart: on-failure

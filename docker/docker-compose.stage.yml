@@ -1,6 +1,6 @@
 services:
-  asp_net:
-    container_name: asp_net
+  users_asp:
+    container_name: users_asp
     image: aspnet
     build: 
       dockerfile: docker/dockerfiles/asp/Dockerfile
@@ -13,11 +13,11 @@ services:
     expose:
       - 8080
     depends_on:
-      postgres_asp_net:
+      postgres_users:
         condition: service_healthy
   
-  postgres_asp_net:
-    container_name: postgres_asp_net
+  postgres_users:
+    container_name: postgres_users
     image: postgres:17rc1-alpine
     restart: on-failure
     env_file: ../.env

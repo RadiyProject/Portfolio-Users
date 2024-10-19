@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ASP.NET.Entities.Context;
+using Users.Entities.Context;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,18 +24,17 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-else {
-    var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-    optionsBuilder.UseNpgsql("Host=" + host + ";Port=" + port + ";Database=" + name + ";Username=" + user + ";Password=" + password + ";");
-
-    using ApplicationDbContext dbContext = new(optionsBuilder.Options);
-    dbContext.Database.Migrate();
 }
 
 app.UseSerilogRequestLogging();

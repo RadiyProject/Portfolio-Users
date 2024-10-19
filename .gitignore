@@ -8,7 +8,9 @@
 
 #database
 /docker/db
+
 /.config
+/obj
 
 # User-specific files
 *.rsuser
