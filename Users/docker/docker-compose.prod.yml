@@ -9,9 +9,9 @@ services:
     env_file: ../.env
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_HTTP_PORTS: 8080
+      ASPNETCORE_HTTP_PORTS: 5981
     expose:
-      - 8080
+      - 5981
     networks:
       - radx
     depends_on:

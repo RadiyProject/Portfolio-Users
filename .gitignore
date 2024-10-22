@@ -4,13 +4,13 @@
 ## Get latest from `dotnet new gitignore`
 
 # dotenv files
-.env
+*.env
 
 #database
-/docker/db
+*/docker/db
 
-/.config
-/obj
+*/.config
+*/obj
 
 # User-specific files
 *.rsuser

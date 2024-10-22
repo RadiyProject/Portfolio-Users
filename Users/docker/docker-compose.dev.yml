@@ -11,9 +11,9 @@ services:
       - /app/obj # <- directory won't be mounted
       - /app/bin # <- directory won't be mounted
     working_dir: /app
-    command: ["dotnet", "watch","run", -v, "--urls", "http://*:8080"]
-    ports:
-      - "5981:8080"
+    command: ["dotnet", "watch","run", -v, "--urls", "http://*:5981"]
+    expose:
+      - 5981
     depends_on:
       - postgres_users
   
